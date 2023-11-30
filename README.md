@@ -1,7 +1,7 @@
 # HoneyAgents: AI-Powered Honeypot Defence System
 
 ## Introduction
-HoneyAgents is proof-of-concept demonstation of an advanced AI-driven defence system that utilises autonomous agents for the detection and mitigation of cyber threats. By integrating honeypots with an autonomous AI agent, HoneyAgents highlights the potential for a new level of proactive security, providing high-fidelity threat intelligence and real-time defensive actions using the power of LLMs (Large Language Models).
+HoneyAgents is proof-of-concept demo of an advanced AI-driven defence system that utilises autonomous agents to detect and mitigate cyber threats. By integrating honeypots with an autonomous AI agent, HoneyAgents highlights the potential for a new level of proactive security, providing high-fidelity threat intelligence and real-time defensive actions using the power of LLMs (Large Language Models).
 
 <img src="images/logo.png" alt="HoneyAgents Logo" width="500" height="auto"/>
 
@@ -52,6 +52,8 @@ docker-compose up --build
 
 ## Configuration
 The Docker Compose file outlines services such as Attacker Simulation, Honeypot, Reverse Proxy, Web Server, and AutoGen Agent. Networks are predefined for segregation and security.
+
+<img src="images/architecture.png" alt="HoneyAgents Architecture" width="800" height="auto"/>
 
 ## Usage
 
