@@ -1,1 +1,5 @@
 .env
+cowrie_logs/audit.log
+cowrie_logs/cowrie.json
+nginx_logs/access.log
+nginx_logs/error.log
