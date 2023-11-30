@@ -1,7 +1,7 @@
 # HoneyAgents: AI-Powered Honeypot Defence System
 
 ## Introduction
-HoneyAgents is proof-of-concept demo of an advanced AI-driven defence system that utilises autonomous agents to detect and mitigate cyber threats. By integrating honeypots with an autonomous AI agent, HoneyAgents highlights the potential for a new level of proactive security, providing high-fidelity threat intelligence and real-time defensive actions using the power of LLMs (Large Language Models).
+HoneyAgents is a proof-of-concept web app defence system that utilises autonomous AI agents to detect and mitigate cyber threats. By integrating honeypots with an autonomous AI agent, HoneyAgents highlights the potential for a new level of proactive security, providing high-fidelity threat intelligence and real-time defensive actions using the power of LLMs (Large Language Models).
 
 <img src="images/logo.png" alt="HoneyAgents Logo" width="500" height="auto"/>
 
@@ -90,7 +90,7 @@ While HoneyAgents is capable of fully autonomous operation, it's configured so t
    ```sh
    docker exec autogen cat /var/report.md
    ```
-   This report contains a natural language write-up of the threats detected and the actions taken by the agent to mitigate them.
+   The report contains a natural language write-up of the threats detected and the actions taken by the agent to mitigate them.
 
 By following the above steps, users can manually trigger and observe the threat detection, mitigation and reporting processes of the HoneyAgents system in action.
 
