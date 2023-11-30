@@ -1,0 +1,14 @@
+# Start with a basic Alpine Linux image
+FROM alpine:latest
+
+# Install SSH, Telnet, and basic networking tools
+RUN apk add --no-cache openssh-client busybox-extras curl netcat-openbsd
+
+# Copy requester script into the container
+COPY ./attacker/repeat_request.sh /repeat_request.sh
+
+# Make the script executable
+RUN chmod +x /repeat_request.sh
+
+# Set the default command to run the script
+CMD ["/repeat_request.sh"]

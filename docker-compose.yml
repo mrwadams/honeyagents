@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+
+  attacker:
+    container_name: attacker
+    build:
+      context: .
+      dockerfile: ./attacker/Dockerfile.attacker
+    extra_hosts:
+      - "www.rebel-alliance.com:172.17.0.1"
+    networks:
+      external_network:
+        ipv4_address: 172.18.0.2
+
+  honeypot:
+    container_name: honeypot
+    image: cowrie/cowrie:latest
+    ports:
+        - "2222:2222"
+        - "2223:2223"
+    env_file:
+      - .env
+    volumes:
+      - ./cowrie_logs:/tmp/logs
+    networks:
+      external_network:
+        ipv4_address: 172.18.0.3
+
+  reverse_proxy:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: ./reverse_proxy/Dockerfile.proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - nginx_config:/etc/nginx/conf.d
+      - ./nginx_logs:/var/log/nginx
+    restart: always
+    depends_on:
+      - web_server
+    networks:
+      dmz_network:
+        ipv4_address: 172.19.0.2
+
+  web_server:
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./web_server/Dockerfile.apache
+    networks:
+      dmz_network:
+        ipv4_address: 172.19.0.3
+
+  autogen:
+    container_name: autogen
+    build:
+      context: .
+      dockerfile: ./autogen/Dockerfile.autogen
+    env_file:
+      - .env
+    volumes:
+      - ./autogen/var:/var
+      - ./cowrie_logs:/tmp/logs
+      - nginx_config:/etc/nginx/conf.d
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      agent_network:
+        ipv4_address: 172.20.0.2
+    depends_on:
+      - honeypot
+
+networks:
+  external_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+  dmz_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
+  agent_network:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  nginx_config:

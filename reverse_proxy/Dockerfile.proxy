@@ -1,0 +1,11 @@
+# Start with the latest version of NGINX as the parent image
+FROM nginx:latest
+
+# Copy the initial proxy configuration into the container
+COPY ./reverse_proxy/proxy.conf /etc/nginx/conf.d/default.conf
+
+# Expose the necessary ports for the web server
+EXPOSE 80 443
+
+# Start NGINX
+CMD ["nginx", "-g", "daemon off;"]
