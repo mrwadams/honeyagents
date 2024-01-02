@@ -35,14 +35,19 @@ At the heart of HoneyAgents is the integration of [AutoGen](https://github.com/m
 - Python 3.x
 - OpenAI API Key
 
+### Recommended Testing Environment
+This project was built and tested on an Ubuntu 23.10 x64 virtual machine hosted by DigitalOcean. If you don't have an existing environment set up, consider using DigitalOcean for a seamless experience. Use the following referral link to get started with $200 in free credits: [https://m.do.co/c/bdda01639ce6](https://m.do.co/c/bdda01639ce6).
+
+Please note that while HoneyAgents should work on various environments, the steps and results you encounter may vary if you use a different setup than the one recommended.
+
 ## Getting Started
 To quickly get started with HoneyAgents, run the following commands:
 ```sh
-git clone https://github.com/yourusername/honeyagents.git
+git clone https://github.com/mrwadams/honeyagents.git
 cd honeyagents
 cp .env.example .env
 # Edit .env to add your OpenAI API key
-docker-compose up --build
+docker-compose up --build -d
 ```
 
 ## Installation
@@ -59,17 +64,37 @@ The Docker Compose file outlines services such as Attacker Simulation, Honeypot,
 
 While HoneyAgents is capable of fully autonomous operation, it's configured so that users can interact with the system to explore its capabilities and trigger specific behaviours. Follow these steps to get the most out of HoneyAgents:
 
-1. **Web Server Accessibility Check**: From the Attacker container, verify that the web server is accessible. Use the following command, which includes an `X-Forwarded-For` header to ensure the source IP is visible to the reverse proxy:
+1. **Web Server Accessibility Check**: Start an interactive session on the Attacker container by running the following command:
+
+   ```sh
+   docker exec -it attacker /bin/sh
+   ```
+
+   From the Attacker container, verify that the web server is accessible. Use the following command, which includes an `X-Forwarded-For` header to ensure the source IP is visible to the reverse proxy:
+
    ```sh
    curl -H "X-Forwarded-For: 172.18.0.2" http://www.rebel-alliance.com
    ```
-   Note: The `X-Forwarded-For` header is essential because Docker's NAT routing would otherwise prevent the reverse proxy from seeing the true source IP of the request. 
+   Note: The `X-Forwarded-For` header is essential because Docker's NAT routing would otherwise prevent the reverse proxy from seeing the true source IP of the request.
 
-2. **Honeypot Interaction**: Simulate an attacker interacting with the honeypot by SSH'ing into it from the Attacker container:
+   If the request is successful, the web server will return the HTML code for the target website.
+
+   <img src="images/curl_screenshot.png" alt="CURL Response" width="300" height="auto"/>
+
+2. **Honeypot Interaction**: Next, we will simulate an attacker interacting with the honeypot by SSH'ing into it from the Attacker container. Without exiting the Attacker container, run the following command to access the Honeypot:
    ```sh
-   ssh -p2222 172.18.0.3
+   ssh -p 2222 172.18.0.3
    ```
-   Feel free to explore the machine. When finished, log out from the Honeypot by typing `exit`.
+   Accept the SSH fingerprint prompt by typing `yes` and pressing `Enter`. The honeypot will then prompt you for a password. 
+   
+   Enter anything you like for the password and press `Enter` to log in.
+
+   Feel free to explore the machine. To give the agent something to think about, create a file called malware.sh by running the following command:
+   ```sh
+   touch malware.sh
+   ```
+
+   When finished, log out from the Honeypot by typing `exit`.
 
    Type `exit` once more to return to the host machine.
 
