@@ -98,10 +98,9 @@ While HoneyAgents is capable of fully autonomous operation, it's configured so t
 
    Type `exit` once more to return to the host machine.
 
-3. **Agent Activation**: Trigger the autonomous agent to review the honeypot logs and set up deny rules against detected malicious IPs. Access the AutoGen container and initiate the agent script using:
+3. **Agent Activation**: Trigger the autonomous agent to review the honeypot logs and set up deny rules against detected malicious IPs. Execute the `run_agent.sh` script in the root of the `honeyagents` directory.
    ```sh
-   docker exec -it autogen bash
-   python agent.py
+   . run_agent.sh
    ```
    Monitor the console output to follow the agent's actions.
 
@@ -116,6 +115,12 @@ While HoneyAgents is capable of fully autonomous operation, it's configured so t
    docker exec autogen cat /var/report.md
    ```
    The report contains a natural language write-up of the threats detected and the actions taken by the agent to mitigate them.
+
+6. **Clean Up**: To reset the environment, run the `cleanup.sh` script in the root of the `honeyagents` directory.
+
+   ```sh
+   . cleanup.sh
+   ```
 
 By following the above steps, users can manually trigger and observe the threat detection, mitigation and reporting processes of the HoneyAgents system in action.
 
