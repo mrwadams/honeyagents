@@ -24,6 +24,8 @@ At the heart of HoneyAgents is the integration of [AutoGen](https://github.com/m
 - Update deny lists dynamically to block identified threats.
 - Generate detailed threat intelligence reports of attackers' actions.
 
+If you'd like a quick (<5 minutes) overview of the project and its capabilities then check out the [demo video](https://www.youtube.com/watch?v=xjQnWf3xWpU).
+
 ## Features
 
 - **Intelligent Threat Detection**: Uses autonomous agents to gather detailed information on attack patterns observed during honeypot interactions.
