@@ -5,7 +5,7 @@ conf_file_path = '/etc/nginx/conf.d/default.conf'
 csv_file_path = '/var/bad_ips.csv'
 
 # Placeholder in the conf file
-placeholder = '#DENY_IPs#'
+placeholder = '# DENY_IPs'
 
 # Read IPs from CSV
 with open(csv_file_path, newline='') as csvfile:

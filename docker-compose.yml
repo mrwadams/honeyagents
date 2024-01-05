@@ -21,8 +21,6 @@ services:
         - "2223:2223"
     env_file:
       - .env
-    volumes:
-      - ./cowrie_logs:/tmp/logs
     networks:
       external_network:
         ipv4_address: 172.18.0.3
@@ -63,7 +61,7 @@ services:
       - .env
     volumes:
       - ./autogen/var:/var
-      - ./cowrie_logs:/tmp/logs
+      - ./honeypot:/var/log/cowrie
       - nginx_config:/etc/nginx/conf.d
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
